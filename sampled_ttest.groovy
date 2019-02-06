@@ -1,19 +1,19 @@
 #!/usr/bin/env groovy
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
 @Grab(group = 'org.apache.commons', module = 'commons-math3', version = '3.6.1')
 import org.apache.commons.math3.stat.inference.TTest
 import org.apache.commons.math3.stat.StatUtils
 
+import java.nio.file.Files
+import java.nio.file.Paths
+
 Locale.setDefault(Locale.ROOT)
 
 /*
- * Usage: groovy triframes_f1_ttest.groovy model1.ser model2.ser ...
+ * Usage: groovy sampled_ttest.groovy model1.ser model2.ser ...
  */
 def options = new CliBuilder().with {
-    usage = 'triframes_f1_ttest.groovy model1.ser model2.ser ...'
+    usage = 'sampled_ttest.groovy model1.ser model2.ser ...'
 
     parse(args) ?: System.exit(1)
 }
@@ -24,6 +24,8 @@ datasets = options.arguments().unique().collectEntries { filename ->
             sample = (double[]) ois.readObject()
         }
     }
+
+    System.err.printf('%s contains %d observations%n', filename, sample.length)
 
     [(filename): sample]
 }
@@ -40,8 +42,9 @@ cases.each { pair ->
 
     pvalue = test.tTest(sample1, sample2)
 
-    printf('%s\t%s\t%f\t%f\t%f\n',
+    printf('%s\t%s\t%f±%f\t%f±%f\t%f\n',
             filename1, filename2,
-            StatUtils.mean(sample1), StatUtils.mean(sample2),
+            StatUtils.mean(sample1), StatUtils.variance(sample1),
+            StatUtils.mean(sample2), StatUtils.variance(sample2),
             pvalue)
 }
