@@ -65,7 +65,7 @@ f1 = result.f1Score * (options.p ? 100 : 1)
 if (options.t) {
     printf(format + '\t', pr, re, f1)
 } else {
-    printf('Super Sense nmPU/niPU/F1: ' + format + '\n', pr, re, f1)
+    printf('Super Sense nmPU/niPU/F1: ' + format + '%n', pr, re, f1)
 }
 
 if (options.s) {
