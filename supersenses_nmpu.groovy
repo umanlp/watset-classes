@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-import org.nlpub.watset.eval.CachedNormalizedModifiedPurity
 import org.nlpub.watset.eval.NormalizedModifiedPurity
 import org.nlpub.watset.util.Sampling
 
@@ -54,7 +53,7 @@ format = options.p ? '%.2f\t%.2f\t%.2f' : '%.5f\t%.5f\t%.5f'
 actual = transform(actual)
 expected = normalize(transform(expected.values().findAll().toList()))
 
-purity_pr = new CachedNormalizedModifiedPurity<String>()
+purity_pr = new NormalizedModifiedPurity<String>()
 purity_re = new NormalizedModifiedPurity<String>(true, false)
 result = NormalizedModifiedPurity.evaluate(purity_pr, purity_re, normalize(actual), expected)
 
@@ -72,7 +71,7 @@ if (options.s) {
     random = new Random(1337)
 
     dataset = actual.toArray(new Map<String, Double>[0])
-    f1_samples = new double[500]
+    f1_samples = new double[5000]
 
     System.err.print('Bootstrapping')
 
