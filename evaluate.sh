@@ -24,8 +24,6 @@ mkdir -p eval
 for DT in dt-wordnet-0_001.txt ; do
     DT_OUTPUT="eval/${DT%.txt}"
 
-    if false ; then
-
     for CW in top log nolog ; do
        time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-cw-$CW.tsv" cw -m "$CW"
     done
@@ -40,11 +38,13 @@ for DT in dt-wordnet-0_001.txt ; do
         time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-cw-$CW_LOCAL-mcl.tsv" watset -l cw -lp "mode=$CW_LOCAL" -g mcl-bin -gp "bin=$MCL"
     done
 
-    # for CW_GLOBAL in top log nolog ; do
-    #     time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-mcl-cw-$CW_GLOBAL.tsv" watset -l mcl -g cw -gp "mode=$CW_GLOBAL"
-    # done
+    if false ; then
 
-    # time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-mcl-mcl.tsv" watset -l mcl -g mcl-bin -gp "bin=$MCL"
+    for CW_GLOBAL in top log nolog ; do
+        time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-mcl-cw-$CW_GLOBAL.tsv" watset -l mcl -g cw -gp "mode=$CW_GLOBAL"
+    done
+
+    time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-mcl-mcl.tsv" watset -l mcl -g mcl-bin -gp "bin=$MCL"
 
     fi
 
