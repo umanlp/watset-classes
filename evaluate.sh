@@ -13,14 +13,12 @@ GOLD=super-senses-wordnet.tsv
 # GOLD=wordnet-flat-cut-depth-5-clusters-5737-minclusize-2.tsv
 # GOLD=wordnet-flat-cut-depth-6-clusters-11274-minclusize-2.tsv
 
-#rm -rf eval
 mkdir -p eval
 
 # for DT in dt-wordnet-0_1.txt dt-wordnet-0_01.txt dt-wordnet-0_001.txt ; do
 # for DT in dt-wordnet-d4-0_1.txt dt-wordnet-d4-0_01.txt dt-wordnet-d4-0_001.txt ; do
 # for DT in dt-wordnet-d5-0_1.txt dt-wordnet-d5-0_01.txt dt-wordnet-d5-0_001.txt ; do
 # for DT in dt-wordnet-d6-0_1.txt dt-wordnet-d6-0_01.txt dt-wordnet-d6-0_001.txt ; do
-# for DT in dt-wordnet-0_1.txt dt-wordnet-0_01.txt ; do
 for DT in dt-wordnet-0_001.txt ; do
     DT_OUTPUT="eval/${DT%.txt}"
 
