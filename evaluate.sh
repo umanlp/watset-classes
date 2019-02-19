@@ -28,6 +28,8 @@ for DT in dt-wordnet-0_001.txt ; do
 
     time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-mcl.tsv" mcl-bin --bin "$MCL"
 
+    time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-maxmax.tsv" maxmax
+
     for CW_LOCAL in top log nolog ; do
         for CW_GLOBAL in top ; do
             time nice java -jar "$WATSET" -i "$DT" -o "$DT_OUTPUT-watset-cw-$CW_LOCAL-cw-$CW_GLOBAL.tsv" watset -l cw -lp "mode=$CW_LOCAL" -g cw -gp "mode=$CW_GLOBAL"
