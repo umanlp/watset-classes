@@ -36,3 +36,9 @@ $ ./dt-wordnet.py -t 0.01 -w wordnet-flat-cut-depth-4-clusters-2017-minclusize-2
 ## Running
 
 Make sure that all the variables in `evaluate.sh` are specified correctly. This script runs everything, including running the clustering algorithms and evaluating them. Note that the `-s` flag of `supersenses_nmpu.groovy` performs sampling, which is *extremely* slow. However, it can be disabled, which is the recommended behaviour during prototyping.
+
+The results of the sampling can be checked with t-test using `sampled_ttest.groovy`. The output format is tab-separated: `file1`,`file2`,`mean1`,`mean2`,`var1`,`var2`,`pvalue`.
+
+```shell
+$ ./sampled_ttest.groovy eval/dt-wordnet-0_01-*.ser
+```
